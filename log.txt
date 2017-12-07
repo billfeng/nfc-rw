@@ -1,0 +1,137 @@
+python tagtool.py show
+SONY RC-S380/P on usb:020:010
+waiting for new NFC tags...
+old message:
+record 1
+  type   = ''
+  name   = ''
+  data   = ''
+new message:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+released:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+old message:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+already same record
+released:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+old message:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+already same record
+released:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+^C►
+►
+►
+►
+► python tagtool.py show
+SONY RC-S380/P on usb:020:010
+waiting for new NFC tags...
+old message:
+record 1
+  type   = 'urn:nfc:wkt:U'
+  name   = ''
+  data   = '\x00##orange'
+new message:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+released:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+old message:
+record 1
+  type   = 'urn:nfc:wkt:U'
+  name   = ''
+  data   = '\x00##white'
+Traceback (most recent call last):
+  File "tagtool.py", line 47, in <module>
+    'on-release': released,
+  File "/Library/Python/2.7/site-packages/nfc/clf/__init__.py", line 580, in connect
+    result = self._rdwr_connect(rdwr_options, terminate)
+  File "/Library/Python/2.7/site-packages/nfc/clf/__init__.py", line 611, in _rdwr_connect
+    if options['on-connect'](tag):
+  File "tagtool.py", line 28, in connected
+    tag.ndef.message = new_message
+  File "/Library/Python/2.7/site-packages/nfc/tag/__init__.py", line 170, in message
+    self.octets = bytes(msg)
+  File "/Library/Python/2.7/site-packages/nfc/tag/__init__.py", line 236, in octets
+    self._write_ndef_data(data)
+  File "/Library/Python/2.7/site-packages/nfc/tag/tt2.py", line 256, in _write_ndef_data
+    tag_memory.synchronize()
+  File "/Library/Python/2.7/site-packages/nfc/tag/tt2.py", line 674, in synchronize
+    self._write_to_tag(stop=len(self))
+  File "/Library/Python/2.7/site-packages/nfc/tag/tt2.py", line 668, in _write_to_tag
+    self._tag.write(index >> 2, data)
+  File "/Library/Python/2.7/site-packages/nfc/tag/tt2.py", line 518, in write
+    raise Type2TagCommandError(INVALID_PAGE_ERROR)
+nfc.tag.tt2.Type2TagCommandError: invalid page number
+► python tagtool.py show
+SONY RC-S380/P on usb:020:010
+waiting for new NFC tags...
+old message:
+record 1
+  type   = ''
+  name   = ''
+  data   = ''
+new message:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+released:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+old message:
+record 1
+  type   = 'urn:nfc:wkt:U'
+  name   = ''
+  data   = '\x00##green'
+new message:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+released:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+old message:
+record 1
+  type   = 'urn:nfc:wkt:U'
+  name   = ''
+  data   = '\x00##pink'
+new message:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
+released:
+record 1
+  type   = 'urn:nfc:wkt:Sp'
+  name   = ''
+  data   = '\x91\x01\x15U\x04youtu.be/0E00Zuayv9QQ\x01\x07T\x02enPPAP'
