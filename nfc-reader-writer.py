@@ -1,6 +1,6 @@
+import sys
 import nfc
 import ndef
-import pprint
 
 END = '\033[0m'
 RED = '\033[91m'
@@ -20,7 +20,8 @@ def dump(tag):
 
 def identify(tag):
     """ Print out the tag type and ID """
-    print "Tag type: " + BLUE + str(tag.ndef) + "\n" + END
+    print "Type: " + BLUE + str(tag.type) + END
+    print "Name: " + BLUE + str(tag.product) + "\n" + END
 
 def erase(tag):
     """ Format tag & over write with 0s """
@@ -29,10 +30,15 @@ def erase(tag):
 
 def read(tag):
     """ Read & print records """
-    print "Current Records:" + BLUE
+    print "Current Records:"
+    print dir(tag)
+    print tag.dump()
     if len(tag.ndef.records) > 0:
         for record in tag.ndef.records:
-            print record
+            print "Type: " + BLUE + record.type + END
+            print "Name: " + BLUE + record.name + END
+            print "Lang: " + BLUE + record.language + END
+            print "Text: " + BLUE + record.text + END
     else:
         print "None."
     print END
@@ -45,9 +51,12 @@ def write(tag):
         payload.close()
         print GREEN + "Write success!\n" + END
         # Print new records
-        print "New Records:" + BLUE
+        print "New Records:"
         for record in tag.ndef.records:
-            print record
+            print "Type: " + BLUE + record.type + END
+            print "Name: " + BLUE + record.name + END
+            print "Lang: " + BLUE + record.language + END
+            print "Text: " + BLUE + record.text + END
         print END
     except IOError as err:
         print RED + "Reading from file failed: " + str(err) + "\n" + END
@@ -64,16 +73,16 @@ def standby(tag):
     # Execute action
     if key == 'd':
         dump(tag)
-    elif key == 'e':
+    elif key == 'e' or key == 'E':
         print GREEN + "Tag ejected. You can safely remove the tag.\n" + END
         return True
-    elif key == 'f':
+    elif key == 'f' or key == 'F':
         erase(tag)
-    elif key == 'i':
+    elif key == 'i' or key == 'I':
         identify(tag)
-    elif key == 'r':
+    elif key == 'r' or key == 'R':
         read(tag)
-    elif key == 'w':
+    elif key == 'w' or key == 'W':
         write(tag)
     else:
         print RED + "Invalid input.\n" + END
@@ -90,12 +99,13 @@ def engaged(tag):
 def released(tag):
     """ Tag is released. """
     print "Tag released. "
-    print YELLOW + "Waiting to read NFC tag...\n" + END
+    print YELLOW + "Waiting to read NFC tag... q) Quit\n" + END
 
 
 device = nfc.ContactlessFrontend('usb')
 print ""
-print GREEN + "Connected to " + str(device) + "\n" + END
+sys.stdout.write(GREEN + "Connected to " + END)
+print BLUE + str(device.device.vendor_name) + str(device.device.product_name) + "\n" + END
 if device:
     while device.connect(rdwr={
         'on-startup': startup,
@@ -104,4 +114,6 @@ if device:
     }):
         pass
 
-print RED + "\n\nDevice disconnected.\n" + END
+print "\n"
+sys.stdout.write(RED + "Disconnected from " + END)
+print BLUE + str(device.device.vendor_name) + str(device.device.product_name) + "\n" + END
