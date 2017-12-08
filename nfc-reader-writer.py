@@ -24,7 +24,7 @@ def identify(tag):
 
 def erase(tag):
     """ Format tag & over write with 0s """
-    tag.erase(None, 0)
+    tag.format(None, 0)
     print BLUE + "Tag formatted." + "\n" + END
 
 def read(tag):
