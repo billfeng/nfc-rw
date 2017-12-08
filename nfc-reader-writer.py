@@ -14,21 +14,24 @@ def startup(targets):
     return targets
 
 def dump(tag):
-    print "Dumpting tag content:"
-    print BLUE + str(tag.dump()) + END + "\n"
+    print "Dumping tag content:"
+    print BLUE + str("\n".join(["  " + line for line in tag.dump()])) + "\n" + END
 
 def identify(tag):
-    print "Tag type: " + BLUE + str(tag.ndef) + END
+    print "Tag type: " + BLUE + str(tag.ndef) + "\n" + END
 
-def fotmat(tag):
-    tag.format(0, 0)
-    print BLUE + "Tag formatted." + END + "\n"
+def format(tag):
+    tag.format(None, 0)
+    print BLUE + "Tag formatted." + "\n" + END
 
 def read(tag):
     # Read & print records
     print "Current Records:" + BLUE
-    for record in tag.ndef.records:
-        print record
+    if len(tag.ndef.records) > 0:
+        for record in tag.ndef.records:
+            print record
+    else:
+        print "None."
     print END
 
 def write(tag):
@@ -92,4 +95,4 @@ if device:
     }):
         pass
 
-print RED + "Device disconnected." + END
+print RED + "\n\nDevice disconnected.\n" + END
