@@ -14,18 +14,21 @@ def startup(targets):
     return targets
 
 def dump(tag):
+    """ Dump the data stored in the tag to standard output """
     print "Dumping tag content:"
     print BLUE + str("\n".join(["  " + line for line in tag.dump()])) + "\n" + END
 
 def identify(tag):
+    """ Print out the tag type and ID """
     print "Tag type: " + BLUE + str(tag.ndef) + "\n" + END
 
-def format(tag):
-    tag.format(None, 0)
+def erase(tag):
+    """ Format tag & over write with 0s """
+    tag.erase(None, 0)
     print BLUE + "Tag formatted." + "\n" + END
 
 def read(tag):
-    # Read & print records
+    """ Read & print records """
     print "Current Records:" + BLUE
     if len(tag.ndef.records) > 0:
         for record in tag.ndef.records:
@@ -35,20 +38,26 @@ def read(tag):
     print END
 
 def write(tag):
-    # Write records
+    """ Read records from file and write to tag """
     try:
-        tag.ndef.records = [ndef.TextRecord('Hello World')]
+        payload = open("payload.txt", "r")
+        tag.ndef.records = [ndef.TextRecord(payload.readline())]
+        payload.close()
         print GREEN + "Write success!\n" + END
         # Print new records
         print "New Records:" + BLUE
         for record in tag.ndef.records:
             print record
         print END
+    except IOError as err:
+        print RED + "Reading from file failed: " + str(err) + "\n" + END
     except nfc.tag.TagCommandError as err:
-        print RED + "Write to tag failed: " + str(err) + END
+        print RED + "Write to tag failed: " + str(err) + "\n" + END
+    except ValueError as err:
+        print RED + "Bad input: " + str(err) + "\n" + END
 
 def standby(tag):
-    # Choose action
+    """ Choose action """
     print YELLOW + "d) Dump e) Eject f) Format i) Identify r) Read w) Write " + END
     key = raw_input("Action: ")
     print ""
@@ -59,7 +68,7 @@ def standby(tag):
         print GREEN + "Tag ejected. You can safely remove the tag.\n" + END
         return True
     elif key == 'f':
-        format(tag)
+        erase(tag)
     elif key == 'i':
         identify(tag)
     elif key == 'r':
