@@ -1,11 +1,12 @@
 # nfc-rw
-A simple NFC tag reader/writer written in Python.
+A simple NFC tag reader/writer in Python.
 
-Tested with the SONY RC-S380 NFC reader/writer.
+Tested with the *SONY RC-S380* NFC reader/writer.
 
 ### Requirement
 
 You will need:
+
 - SONY RC-S380 NFC reader/writer
 - Python 2.7
 - The nfc library 
@@ -14,7 +15,9 @@ You will need:
 ### Dependencies
 
 There are two libraries you will need to install.
+
 Installing using `pip` is recommended.
+
 ```
 pip install nfcpy
 pip install ndeflib
@@ -27,6 +30,7 @@ python nfc-rw.py
 ```
 
 ### Usage
+
 1. Plug in the RC-S380 into your usb port
 2. Run the script
 3. Place NFC tag on the RC-S380
@@ -36,6 +40,7 @@ python nfc-rw.py
 7. `Contorl + c` to end script or place another tag on the device to continue
 
 ### Actions
+
 | key | name | action |
 |-----|------|--------|
 |  d  | Dump | Dumps the raw data stored in the tag to console without any formatting |
