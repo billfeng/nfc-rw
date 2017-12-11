@@ -31,16 +31,21 @@ def erase(tag):
 def read(tag):
     """ Read & print records """
     print "Current Records:"
-    print dir(tag)
-    print tag.dump()
     if len(tag.ndef.records) > 0:
         for record in tag.ndef.records:
-            print "Type: " + BLUE + record.type + END
-            print "Name: " + BLUE + record.name + END
-            print "Lang: " + BLUE + record.language + END
-            print "Text: " + BLUE + record.text + END
+            print ""
+            if record.type == "urn:nfc:wkt:T":
+                print "Type: " + BLUE + "Text Record" + END
+                print "Name: " + BLUE + record.name + END
+                print "Lang: " + BLUE + record.language + END
+                print "Enco: " + BLUE + record.encoding + END
+                print "Text: " + BLUE + record.text + END
+            else:
+                print "Type: " + BLUE + record.type + END
+                print "Data: " + BLUE + record.data + END
     else:
-        print "None."
+        print ""
+        print BLUE + "None" + END
     print END
 
 def write(tag):
@@ -53,10 +58,16 @@ def write(tag):
         # Print new records
         print "New Records:"
         for record in tag.ndef.records:
-            print "Type: " + BLUE + record.type + END
-            print "Name: " + BLUE + record.name + END
-            print "Lang: " + BLUE + record.language + END
-            print "Text: " + BLUE + record.text + END
+            print ""
+            if record.type == "urn:nfc:wkt:T":
+                print "Type: " + BLUE + "Text Record" + END
+                print "Name: " + BLUE + record.name + END
+                print "Lang: " + BLUE + record.language + END
+                print "Enco: " + BLUE + record.encoding + END
+                print "Text: " + BLUE + record.text + END
+            else:
+                print "Type: " + BLUE + record.type + END
+                print "Data: " + BLUE + record.data + END
         print END
     except IOError as err:
         print RED + "Reading from file failed: " + str(err) + "\n" + END
@@ -70,23 +81,27 @@ def standby(tag):
     print YELLOW + "d) Dump e) Eject f) Format i) Identify r) Read w) Write " + END
     key = raw_input("Action: ")
     print ""
-    # Execute action
-    if key == 'd':
-        dump(tag)
-    elif key == 'e' or key == 'E':
-        print GREEN + "Tag ejected. You can safely remove the tag.\n" + END
-        return True
-    elif key == 'f' or key == 'F':
-        erase(tag)
-    elif key == 'i' or key == 'I':
-        identify(tag)
-    elif key == 'r' or key == 'R':
-        read(tag)
-    elif key == 'w' or key == 'W':
-        write(tag)
+    if tag.is_present:
+        # Execute action
+        if key == 'd':
+            dump(tag)
+        elif key == 'e' or key == 'E':
+            print GREEN + "Tag ejected. You can safely remove the tag.\n" + END
+            return True
+        elif key == 'f' or key == 'F':
+            erase(tag)
+        elif key == 'i' or key == 'I':
+            identify(tag)
+        elif key == 'r' or key == 'R':
+            read(tag)
+        elif key == 'w' or key == 'W':
+            write(tag)
+        else:
+            print RED + "Invalid input.\n" + END
+        return False
     else:
-        print RED + "Invalid input.\n" + END
-    return False
+        print RED + "Tag is not within communication range.\n" + END
+        return True
 
 def engaged(tag):
     """ Tag is engated, identify tag. """
@@ -99,13 +114,13 @@ def engaged(tag):
 def released(tag):
     """ Tag is released. """
     print "Tag released. "
-    print YELLOW + "Waiting to read NFC tag... q) Quit\n" + END
+    print YELLOW + "Waiting to read NFC tag...\n" + END
 
 
 device = nfc.ContactlessFrontend('usb')
 print ""
 sys.stdout.write(GREEN + "Connected to " + END)
-print BLUE + str(device.device.vendor_name) + str(device.device.product_name) + "\n" + END
+print BLUE + str(device.device.vendor_name) + " " + str(device.device.product_name) + "\n" + END
 if device:
     while device.connect(rdwr={
         'on-startup': startup,
@@ -116,4 +131,4 @@ if device:
 
 print "\n"
 sys.stdout.write(RED + "Disconnected from " + END)
-print BLUE + str(device.device.vendor_name) + str(device.device.product_name) + "\n" + END
+print BLUE + str(device.device.vendor_name) + " " + str(device.device.product_name) + "\n" + END
