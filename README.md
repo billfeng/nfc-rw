@@ -1,7 +1,7 @@
 # nfc-rw
 A simple NFC tag reader/writer in Python.
 
-Tested with the *SONY RC-S380* NFC reader/writer.
+Tested with the **SONY RC-S380** NFC reader/writer.
 
 ### Requirement
 
