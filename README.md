@@ -45,11 +45,11 @@ python nfc-rw.py
 
 ### Actions
 
-| key | name | action |
-|-----|------|--------|
-|  d  | Dump | Dumps the raw data stored in the tag to console without any formatting |
-|  e  | Eject | Lets the script know you want to remove the tag before doing so |
-|  f  | Format | Overwrites all the data stored in the tag with `0`s |
+| key | name     | action |
+|-----|----------|--------|
+|  d  | Dump     | Dumps the raw data stored in the tag to console without any formatting |
+|  e  | Eject    | Lets the script know you want to remove the tag before doing so |
+|  f  | Format   | Overwrites all the data stored in the tag with `0`s |
 |  i  | Identify | Logs the tag type and product name to console |
-|  r  | Read | Prints formatted records stored in the tag to console |
-|  w  | Write | Writes the text inside `payload.txt` as a text record to tag |
+|  r  | Read     | Prints formatted records stored in the tag to console |
+|  w  | Write    | Writes the text inside `payload.txt` as a text record to tag |
