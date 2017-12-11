@@ -14,7 +14,7 @@ You will need:
 
 ### Installation
 
-**Step one:** There are two libraries you'll need. Installing using `pip` is recommended.
+**Step one:** There are two libraries you'll need to install using `pip`.
 
 ```
 pip install nfcpy
