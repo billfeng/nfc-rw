@@ -14,14 +14,14 @@ You will need:
 
 ### Installation
 
-*** Step one: *** There are two libraries you'll need. Installing using `pip` is recommended.
+**Step one:** There are two libraries you'll need. Installing using `pip` is recommended.
 
 ```
 pip install nfcpy
 pip install ndeflib
 ```
 
-*** Step Two: *** Then simply clone the repository.
+**Step Two:** Then simply clone the repository.
 
 ```
 git clone https://github.com/bill-feng/nfc-rw.git
