@@ -39,13 +39,17 @@ def read(tag):
 def write(tag):
     """ Read records from file and write to tag """
     try:
-        payload = open("payload.txt", "r")
-        tag.ndef.records = [ndef.TextRecord(payload.readline())]
-        payload.close()
-        print GREEN + "Write success!\n" + END
-        # Print new records
-        print "New Records:"
-        prettyprint(tag)
+        payloadfile = open("payload.txt", "r")
+        payload = payloadfile.readline()
+        payloadfile.close()
+        if len(str(payload)) > tag.ndef.capacity:
+            print RED + "Length of message is too long!\n" + END
+        else:
+            tag.ndef.records = [ndef.TextRecord(payload)]
+            print GREEN + "Write success!\n" + END
+            # Print new records
+            print "New Records:"
+            prettyprint(tag)
     except IOError as err:
         print RED + "Reading from file failed: " + str(err) + "\n" + END
     except nfc.tag.TagCommandError as err:
