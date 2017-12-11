@@ -26,27 +26,15 @@ def identify(tag):
 def erase(tag):
     """ Format tag & over write with 0s """
     tag.format(None, 0)
-    print BLUE + "Tag formatted." + "\n" + END
+    print GREEN + "Format success!" + "\n" + END
 
 def read(tag):
     """ Read & print records """
     print "Current Records:"
     if len(tag.ndef.records) > 0:
-        for record in tag.ndef.records:
-            print ""
-            if record.type == "urn:nfc:wkt:T":
-                print "Type: " + BLUE + "Text Record" + END
-                print "Name: " + BLUE + record.name + END
-                print "Lang: " + BLUE + record.language + END
-                print "Enco: " + BLUE + record.encoding + END
-                print "Text: " + BLUE + record.text + END
-            else:
-                print "Type: " + BLUE + record.type + END
-                print "Data: " + BLUE + record.data + END
+        prettyprint(tag)
     else:
-        print ""
-        print BLUE + "None" + END
-    print END
+        print BLUE + "\nNone\n" + END
 
 def write(tag):
     """ Read records from file and write to tag """
@@ -57,24 +45,28 @@ def write(tag):
         print GREEN + "Write success!\n" + END
         # Print new records
         print "New Records:"
-        for record in tag.ndef.records:
-            print ""
-            if record.type == "urn:nfc:wkt:T":
-                print "Type: " + BLUE + "Text Record" + END
-                print "Name: " + BLUE + record.name + END
-                print "Lang: " + BLUE + record.language + END
-                print "Enco: " + BLUE + record.encoding + END
-                print "Text: " + BLUE + record.text + END
-            else:
-                print "Type: " + BLUE + record.type + END
-                print "Data: " + BLUE + record.data + END
-        print END
+        prettyprint(tag)
     except IOError as err:
         print RED + "Reading from file failed: " + str(err) + "\n" + END
     except nfc.tag.TagCommandError as err:
         print RED + "Write to tag failed: " + str(err) + "\n" + END
     except ValueError as err:
         print RED + "Bad input: " + str(err) + "\n" + END
+
+def prettyprint(tag):
+    """ Helper function for printing the tag. Used by read() and write() """
+    for record in tag.ndef.records:
+        print ""
+        if record.type == "urn:nfc:wkt:T":
+            print "Type: " + BLUE + "Text Record" + END
+            print "Name: " + BLUE + record.name + END
+            print "Lang: " + BLUE + record.language + END
+            print "Enco: " + BLUE + record.encoding + END
+            print "Text: " + BLUE + record.text + END
+        else:
+            print "Type: " + BLUE + record.type + END
+            print "Data: " + BLUE + record.data + END
+    print ""
 
 def standby(tag):
     """ Choose action """
@@ -83,7 +75,7 @@ def standby(tag):
     print ""
     if tag.is_present:
         # Execute action
-        if key == 'd':
+        if key == 'd' or key == 'D':
             dump(tag)
         elif key == 'e' or key == 'E':
             print GREEN + "Tag ejected. You can safely remove the tag.\n" + END
