@@ -36,15 +36,11 @@ python nfc-rw.py
 7. `Contorl + c` to end script or place another tag on the device to continue
 
 ### Actions
-- d) Dump
-  - Dumps the raw data stored in the tag to console without any formatting
-- e) Eject
-  - Lets the script know you want to remove the tag before doing so
-- f) Format
-  - Overwrites all the data stored in the tag with `0`s
-- i) Identify
-  - Logs the tag type and product name to console
-- r) Read
-  - Prints formatted records stored in the tag to console
-- w) Write
-  - Writes the text inside `payload.txt` as a text record to tag
+| key | name | action |
+|-----|------|--------|
+|  d  | Dump | Dumps the raw data stored in the tag to console without any formatting |
+|  e  | Eject | Lets the script know you want to remove the tag before doing so |
+|  f  | Format | Overwrites all the data stored in the tag with `0`s |
+|  i  | Identify | Logs the tag type and product name to console |
+|  r  | Read | Prints formatted records stored in the tag to console |
+|  w  | Write | Writes the text inside `payload.txt` as a text record to tag |
