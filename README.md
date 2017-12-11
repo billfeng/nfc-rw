@@ -12,7 +12,7 @@ You will need:
 - The nfc library 
 - The ndef library
 
-### Dependencies
+### Installation
 
 There are two libraries you will need to install.
 
@@ -21,6 +21,12 @@ Installing using `pip` is recommended.
 ```
 pip install nfcpy
 pip install ndeflib
+```
+
+Then simply clone the repository.
+
+```
+git clone https://github.com/bill-feng/nfc-rw.git
 ```
 
 ### Run
